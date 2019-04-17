@@ -22,3 +22,11 @@
 
 > production mode 可以开箱即用的进行各种优化， 不只是压缩， 还包括作用域提升， tree-shaking等.
 > `webpack@4` 的配置虽然很便利， 但在开发过程中需要多种模式， 多种业务进行 `webpack` 的详细配置。
+
+在使用 `webpack.config.js` 为配置文件的时候， `mode` 模式可以 使用 `mode` 配置。
+
+```js
+module.exports = {
+    mode: 'development'
+}
+```
