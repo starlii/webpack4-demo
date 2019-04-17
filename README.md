@@ -61,6 +61,22 @@ entry: {
 
 这时在 `output.filename` 中使用 `[name]` 接收时， 打包后的文件名为 `main.js`
 
+## output.filename 中使用 `[hash]`
+为了避免浏览器中对相同命名的静态文件发生缓存， 每次打包我们都需要改变静态文件的命名， 这时可以在 `output.filename` 中添加 `[hash]` 值。
+
+```js
+output: {
+    path: path.resolve(__dirname, 'dist'),
+    filename: '[name][hash].js'
+}
+```
+打包后的文件名将会拼接上 `hash` 值。
+
+![](https://user-gold-cdn.xitu.io/2019/4/17/16a295559e9bc4fb?w=879&h=278&f=png&s=69741)
+
+![](https://user-gold-cdn.xitu.io/2019/4/17/16a2956e3f5f5239?w=438&h=365&f=png&s=34193)
+
+
 
 
 
