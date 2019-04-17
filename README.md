@@ -1,37 +1,72 @@
-# webpack4-demo 01 安装与运行
+# webpack4-demo 02 entry/output
+当需要更改默认的 `webpack` 的配置的时候， 就需要新建一份 `webpack.config.js` 文件， 覆盖默认的 `webpack` 打包行为.
 
-## 安装 `webpack` 
-由于 `webpack` 依赖于 `webpack-cli`，所以webpack 的运行需要安装两个 `npm` 包： `webpack` `webpack-cli`。
-
-```bash
-# 建议本地安装
-npm install webpack webpack-cli --save-dev
+```js
+module.exports = {
+    entry: {},
+    output: {}
+}
 ```
 
-## webpack 运行
-`webpack4+` 版本号称 0 配置，那么在安装之后试着运行一下 `npx webpack`
+> `webpack.config.js` 使用 `module.exports` 向外暴露一个对象， 这个对象中包含了 `webpack` 打包的各项配置. 
 
-> `npx` 是 `npm@5,2.0` 开始出现的 `npm 执行器`， 目的是省去在 `package.json` 中配置 `scripts`， 直接去执行在本地安装的可执行命令。  例如 ```npx webpack```
+更改默认的  `entry` `output`
 
-![](https://user-gold-cdn.xitu.io/2019/4/15/16a2025d78d408e2?w=1207&h=399&f=png&s=76189)
-
-当执行 `npx webpack` 的时候， 发现会报错： `未找到 .src/ 的入口文件`， 这是因为在 `webpack@4` 以前， 运行 `webpack` 的命令必须要写一个配置文件， 并且在这个配置文件里面声明 1.打包的入口文件  2.打包后文件的放置位置。 而 `webpack@4+` 在没有配置文件的情况下， 会默认将 `src/index.js` 作为入口文件。
-
-新增 `./src/index.js`后再次运行 `webpack` 命令.
-
-```bash 
-mkdir src
-
-echo "console.log('text webpack entry ')" > src/index.js
-
-npx webpack
+```js
+const path = require('path')
+module.exports = {
+    entry: {
+        app: './src/index.js'
+    }, 
+    output: {
+        path: path.resolve(__dirname, 'dist'), 
+        filename: 'bundle.js'
+    }
+}
 ```
-可以看到， 在新建 `src/index.js` 之后， 运行 `webpack` 后的打包已经成功了。
+>注意
+* 当 `entry` 只有一个入口的时候， 可以缩写为 `entry: './src/index.js'` 
+* `output` 的路径需要是一个绝对路径， 所以需要使用 `path.resove()` 把 `__dirname`+ `dist` 拼接为绝对路径
 
-![](https://user-gold-cdn.xitu.io/2019/4/15/16a20317793f337a?w=1188&h=310&f=png&s=59926)
+## output.filename 中使用 `[name]`
+在 `entry` 对象中， 对象的 `key` 可以在 `output.filename` 中使用 `[name]` 接收， 所以当 `entry` 中定义多个 `key` `value` 的时候， 打包后的文件可以使用 `[name].js` 来接受.
 
-打包后的文件默认将会放到在 `./dist/main.js`
+```js
+{
+    entry: {
+        app: './src/demo01.js',
+        vendor: './src/demo02.js'
+    }, 
+    output: {
+        path: path.resolve(__dirname, 'dist'), 
+        filename: '[name].js'
+    }
+}
+```
 
-![](https://user-gold-cdn.xitu.io/2019/4/15/16a2030f28885f13?w=231&h=292&f=png&s=21151)
+![](https://user-gold-cdn.xitu.io/2019/4/17/16a293b538450ce7?w=608&h=282&f=png&s=56456)
 
-> 可以发现当运行 `npx webpack` 后， 在打包成功后，出现了警告的文字， 这是在告诉我们要声明当前的打包环境是生产环境还是开发环境。 demo2 中将会分析这个。
+![](https://user-gold-cdn.xitu.io/2019/4/17/16a2932af48ee6e4?w=252&h=96&f=png&s=4492)
+
+
+当在 `output.filename` 使用 `[name]` 时， 可以看到打包后的文件命是按照 `entry` 里面的 `key` 生成的。
+
+当 `entry` 为一个的时候可以简写为 `entry: './src/index.js'` 这种写法是下面写法的简写
+
+```js
+entry: {
+    main: './src/index.js'
+}
+```
+
+这时在 `output.filename` 中使用 `[name]` 接收时， 打包后的文件名为 `main.js`
+
+
+
+
+
+
+
+
+
+
