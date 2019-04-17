@@ -1,4 +1,4 @@
-# webpack4-demo 02 entry/output
+# webpack4-demo 03 entry/output
 当需要更改默认的 `webpack` 的配置的时候， 就需要新建一份 `webpack.config.js` 文件， 覆盖默认的 `webpack` 打包行为.
 
 ```js
