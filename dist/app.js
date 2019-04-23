@@ -91,9 +91,20 @@
   !*** ./src/index.js ***!
   \**********************/
 /*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+eval("const main = __webpack_require__(/*! ./main.js */ \"./src/main.js\")\nconsole.log('test webpack entry')\n\n\n//# sourceURL=webpack:///./src/index.js?");
+
+/***/ }),
+
+/***/ "./src/main.js":
+/*!*********************!*\
+  !*** ./src/main.js ***!
+  \*********************/
+/*! no static exports found */
 /***/ (function(module, exports) {
 
-eval("\nconsole.log('test webpack entry')\n\n\n//# sourceURL=webpack:///./src/index.js?");
+eval("console.log('main module')\n\n//# sourceURL=webpack:///./src/main.js?");
 
 /***/ })
 
