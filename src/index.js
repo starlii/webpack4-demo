@@ -1,5 +1,2 @@
-import _ from 'lodash'
-
+const main = require('./main.js')
 console.log('test webpack entry')
-
-console.log(_.join(['a', 'b', 'c'], '***'))
